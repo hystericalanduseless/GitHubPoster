@@ -95,7 +95,7 @@ jobs:
       - name: Run sync kindle script
         if: contains(env.TYPE, 'kindle')
         run: |
-          python -m github_poster kindle --kindle_cookie  '${{ secrets.KINDLE_COOKIE }} --me ${{ env.ME }}
+          python -m github_poster kindle --kindle_cookie "${{ secrets.KINDLE_COOKIE }}" --me ${{ env.ME }}
 
       - name: Run sync bilibili script
         if: contains(env.TYPE, 'bilibili')

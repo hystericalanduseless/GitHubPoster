@@ -9,8 +9,8 @@ env:
   # please change to your own config.
   # this actions generate only this year
   # If you fork this please change the type to yours below
-  TYPE: "strava, github, forest, pass" # support strava/gpx/ns/cichang/shanbay/duolingo/issue/leetcode/github/gitlab/kindle/bilibili/wakatime/dota2/forest, Please change the 'pass' it to your own separated by commas
-  ME: yihong0618
+  TYPE: "duolingo, kindle, bbdc" # support strava/gpx/ns/cichang/shanbay/duolingo/issue/leetcode/github/gitlab/kindle/bilibili/wakatime/dota2/forest, Please change the 'pass' it to your own separated by commas
+  ME: beepblop
 
 jobs:
   sync:
@@ -122,6 +122,12 @@ jobs:
         run: |
           python3 -m github_poster openlanguage --openlanguage_user_name "${{ secrets.OPENLANGUAGE_USER_NAME }}" --openlanguage_password "${{ secrets.OPENLANGUAGE_PASSWORD }}" --me ${{ env.ME }}
 
+      #自己添加了不背单词
+      - name: Run sync bbdc script
+        if: contains(env.TYPE, 'bbdc')
+        run: |
+          python -m github_poster bbdc --bbdc_user_id "${{ secrets.BBDC_USER_ID }}" --bbdc_type word --me ${{ env.ME }}
+
       # change the types to yours
       - name: Run sync multiple script
         if: contains(env.TYPE, 'multiple')
@@ -133,7 +139,7 @@ jobs:
         if: github.repository_owner == 'yihong0618'
         run: mv OUT_FOLDER/*.svg examples/
 
-      - name: Push new postger
+      - name: Push new poster
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"

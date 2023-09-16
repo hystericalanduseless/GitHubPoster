@@ -25,7 +25,7 @@ setup(
         "todoist": ["pandas"],
         "all": [
             "twint_fork",
-            "garminconnect",
+            "garminconnect==0.1.55",
             "gpxpy",
             "stravalib",
             "PyGithub",

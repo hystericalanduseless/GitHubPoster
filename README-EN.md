@@ -40,6 +40,8 @@ Make everything a GitHub svg poster and [skyline](https://skyline.github.com/)!
 - **[OpenLanguage](#OpenLanguage)**
 - **[Apple Health](#AppleHealth)**
 - **[ChatGPT](#ChatGPT)**
+- **[NeoDB](#NeoDB)**
+- **[AutoSleep](#AutoSleep)**
 
 ## Download
 ```
@@ -348,11 +350,13 @@ github_poster dota2 --dota2_id="your dota2 id" --year 2017-2018
 <details>
 <summary>Make your <code> Nike </code> poster</summary>>
 
-获取 Nike 的 refresh_token
+**ALL need to do outside GFW**
 
-1. 登录 [Nike](https://www.nike.com) 官网
-2. In Developer -> Application-> Storage -> https:unite.nike.com 中找到 refresh_token
+![example img](https://user-images.githubusercontent.com/67903793/282300381-4e7437d0-65a9-4eed-93d1-2b70e360215f.png)
 
+1. Login from this [website](https://unite.nike.com/s3/unite/mobile.html?androidSDKVersion=3.1.0&corsoverride=https%3A%2F%2Funite.nike.com&uxid=com.nike.sport.running.droid.3.8&backendEnvironment=identity&view=login&clientId=VhAeafEGJ6G8e9DxRUz8iE50CZ9MiJMG), open F12 -> XHR -> get the `refresh_token` from login api.
+
+2. copy this `refresh_token` and use it in GitHub Secrets or in command line
 
 ```
 python3 -m github_poster nike --nike_refresh_token="your nike_refresh_token" --year 2012-2021
@@ -551,6 +555,7 @@ python3 -m github_poster apple_health --apple_health_mode backfill --year 2015-2
 or
 github_poster apple_health --apple_health_mode backfill --year 2015-2021 --apple_health_record_type <move, exercise, stand> --me "your name"
 ```
+</details>
 
 ### ChatGPT
 
@@ -585,6 +590,21 @@ python3 -m github_poster neodb --neodb_token <token> --mark_type <complete, wish
 
 Moreover, you can choose `all` as `mark_type` to import all marks.
 
+</details>
+
+### AutoSleep
+
+<details>
+<summary>Make your <code>AutoSleep</code> Github poster</summary>
+<br>
+
+Export your `AutoSleep` data from app（eg. autosleep.csv）, then run
+
+```
+python3 -m github_poster autosleep --autosleep_file "your csv file" --me "your name"
+or
+github_poster autosleep --autosleep_file "your csv file" --me "your name"
+```
 </details>
 
 # Contribution

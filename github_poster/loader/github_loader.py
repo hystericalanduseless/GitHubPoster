@@ -1,3 +1,5 @@
+from threading import Thread
+
 import requests
 
 from github_poster.html_parser import GitHubParser
@@ -23,20 +25,28 @@ class GitHubLoader(BaseLoader):
             help="",
         )
 
-    def make_track_dict(self):
-        for y in self.year_list:
-            p = GitHubParser()
-            try:
-                r = requests.get(
-                    GITHUB_CONTRIBUCTIONS_URL.format(
-                        user_name=self.user_name,
-                        start_day=f"{y}-01-01",
-                        end_day=f"{y}-12-31",
-                    )
+    def _make_one_year(self, y):
+        p = GitHubParser()
+        try:
+            r = requests.get(
+                GITHUB_CONTRIBUCTIONS_URL.format(
+                    user_name=self.user_name,
+                    start_day=f"{y}-01-01",
+                    end_day=f"{y}-12-31",
                 )
-                self.number_by_date_dict.update(p.make_contribution_dict(r.text))
-            except Exception as e:
-                raise LoadError(f"Can not get GitHub contributions error: {str(e)}")
+            )
+            self.number_by_date_dict.update(p.make_contribution_dict(r.text))
+        except Exception as e:
+            raise LoadError(f"Can not get GitHub contributions error: {str(e)}")
+
+    def make_track_dict(self):
+        thread_list = []
+        for y in self.year_list:
+            thread_list.append(Thread(target=self._make_one_year, args=(y,)))
+        for t in thread_list:
+            t.start()
+        for t in thread_list:
+            t.join()
         for _, v in self.number_by_date_dict.items():
             self.number_list.append(v)
 

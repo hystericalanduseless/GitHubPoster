@@ -51,6 +51,8 @@ Make everything a GitHub svg poster and [skyline](https://skyline.github.com/)!
 - **[开言英语](#开言英语)**
 - **[Apple Health](#AppleHealth)**
 - **[ChatGPT](#ChatGPT)**
+- **[NeoDB](#NeoDB)**
+- **[AutoSleep](#AutoSleep)**
 
 ## 下载
 
@@ -406,8 +408,15 @@ github_poster dota2 --dota2_id="your dota2 id" --year 2017-2018
 
 获取 Nike 的 refresh_token
 
-1. 登录 [Nike](https://www.nike.com) 官网
-2. In Developer -> Application-> Storage -> https:unite.nike.com 中找到 refresh_token
+获取 Nike 的 refresh_token
+
+**全部需要在大陆以外的全局 ip 下进行**
+
+![example img](https://user-images.githubusercontent.com/67903793/282300381-4e7437d0-65a9-4eed-93d1-2b70e360215f.png)
+
+1. 在这里登陆[website](https://unite.nike.com/s3/unite/mobile.html?androidSDKVersion=3.1.0&corsoverride=https%3A%2F%2Funite.nike.com&uxid=com.nike.sport.running.droid.3.8&backendEnvironment=identity&view=login&clientId=VhAeafEGJ6G8e9DxRUz8iE50CZ9MiJMG), 打开 F12 在浏览器抓 login -> XHR -> get the `refresh_token` from login api
+
+2. 复制 `refresh_token`
 
 ```
 python3 -m github_poster nike --nike_refresh_token="your nike_refresh_token" --year 2012-2021
@@ -673,6 +682,22 @@ python3 -m github_poster neodb --neodb_token <token> --mark_type <complete, wish
 ```
 
 特别地，`mark_type` 也可以选择 `all`, 此时会将三种分类的标注都导入。
+
+</details>
+
+### AutoSleep
+
+<details>
+<summary>Make your <code>AutoSleep</code> Github poster</summary>
+<br>
+
+导出 AutoSleep 的数据（eg. autosleep.csv）
+
+```
+python3 -m github_poster autosleep --autosleep_file "your csv file" --me "your name"
+or
+github_poster autosleep --autosleep_file "your csv file" --me "your name"
+```
 
 </details>
 
